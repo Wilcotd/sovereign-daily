@@ -17,290 +17,231 @@
   --text2: rgba(245,245,247,0.6);
   --text3: rgba(245,245,247,0.3);
   --border: rgba(255,255,255,0.06);
+  --accent: rgba(245,245,247,0.9);
+  --green: #34c759;
+  --red: #ff453a;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
-
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100dvh;
-  padding-top: var(--safe-top);
-  padding-bottom: calc(64px + var(--safe-bottom));
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
+  background: var(--bg); color: var(--text); min-height: 100dvh;
+  padding-top: var(--safe-top); padding-bottom: calc(64px + var(--safe-bottom));
+  overflow-x: hidden; -webkit-font-smoothing: antialiased;
 }
 
-/* ===== HEADER ===== */
-.header {
-  position: sticky; top: 0; z-index: 100;
-  padding: 16px 24px 14px;
-  background: rgba(0,0,0,0.92);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-}
+/* HEADER */
+.header { position: sticky; top: 0; z-index: 100; padding: 16px 24px 14px; background: rgba(0,0,0,0.92); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
 .header-row { display: flex; justify-content: space-between; align-items: baseline; }
 .header-greeting { font-size: 32px; font-weight: 700; letter-spacing: -0.8px; }
 .header-time { font-size: 15px; font-weight: 500; color: var(--text2); font-variant-numeric: tabular-nums; }
 .header-sub { font-size: 14px; color: var(--text3); margin-top: 2px; font-weight: 400; }
 
-/* ===== BENTO CARD (desktop base) ===== */
-.bento-card {
-  background: var(--surface);
-  border-radius: 16px;
-  padding: 20px;
-  border: 1px solid var(--border);
-}
+/* BENTO CARDS */
+.bento-card { background: var(--surface); border-radius: 16px; padding: 20px; border: 1px solid var(--border); margin-bottom: 12px; animation: fadeIn 0.3s ease; }
+.section-title { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text3); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.badge { font-size: 12px; font-weight: 700; color: var(--text2); letter-spacing: -0.3px; margin-left: auto; }
 
-/* ===== PROGRESS ===== */
-.progress-bar-wrap {
-  display: flex; align-items: center; gap: 12px;
-}
-.progress-track {
-  flex: 1; height: 4px; background: var(--surface2); border-radius: 2px; overflow: hidden;
-}
-.progress-fill {
-  height: 100%; background: var(--text); border-radius: 2px;
-  transition: width 0.5s ease;
-}
-.progress-label { font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--text); min-width: 50px; }
+/* PROGRESS */
+.progress-label { font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.progress-track { height: 4px; background: var(--surface2); border-radius: 2px; overflow: hidden; margin-top: 8px; }
+.progress-fill { height: 100%; background: var(--text); border-radius: 2px; transition: width 0.5s ease; }
 
-/* ===== STREAK ===== */
-.streak-row {
-  display: flex; gap: 3px; justify-content: center; flex-wrap: wrap;
-}
-.streak-dot {
-  width: 22px; height: 22px; border-radius: 5px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 9px; font-weight: 600; color: var(--text3); background: var(--surface2);
-}
+/* STREAK ROW (14-day) */
+.streak-row { display: flex; gap: 3px; justify-content: center; flex-wrap: wrap; }
+.streak-dot { width: 22px; height: 22px; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 600; color: var(--text3); background: var(--surface2); }
 .streak-dot.done { background: rgba(245,245,247,0.12); color: var(--text2); }
 .streak-dot.today { background: var(--text); color: #000; }
-.streak-dot.empty { background: var(--surface2); color: var(--text3); }
 
-/* ===== SECTION TITLE ===== */
-.section-title {
-  font-size: 11px; font-weight: 600; letter-spacing: 1px;
-  text-transform: uppercase; color: var(--text3); margin-bottom: 14px;
-}
+/* DAILY RULE */
+.daily-rule { font-size: 14px; color: var(--text2); line-height: 1.55; font-style: italic; }
 
-/* ===== DAILY RULE ===== */
-.daily-rule-text {
-  font-size: 14px; color: var(--text2); line-height: 1.55; font-style: italic;
-}
+/* STATEMENT CARDS */
+.statement-card { border-left: 3px solid rgba(245,245,247,0.15); }
+.statement-text { font-size: 15px; line-height: 1.7; color: var(--text); font-style: italic; font-weight: 400; }
+.statement-hint { font-size: 10px; color: var(--text3); margin-top: 8px; cursor: pointer; }
+.statement-hint:hover { color: var(--text2); }
+.statement-input { width: 100%; min-height: 100px; background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; color: var(--text); font-family: inherit; font-size: 14px; line-height: 1.6; padding: 14px; resize: vertical; outline: none; margin-top: 8px; }
+.statement-input:focus { border-color: rgba(245,245,247,0.2); }
+.statement-save { padding: 8px 20px; border: none; border-radius: 8px; background: var(--text); color: #000; font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 8px; font-family: inherit; }
 
-/* ===== MODE TOGGLE ===== */
-.mode-bar {
-  display: flex; gap: 0; margin: 24px 24px 0;
-  background: var(--surface); border-radius: 10px; padding: 3px;
-}
-.mode-btn {
-  flex: 1; padding: 8px; border: none; border-radius: 8px;
-  font-size: 13px; font-weight: 600; cursor: pointer;
-  background: transparent; color: var(--text3); transition: all 0.25s;
-}
+/* MODE TOGGLE */
+.mode-bar { display: flex; gap: 0; margin: 24px 24px 0; background: var(--surface); border-radius: 10px; padding: 3px; }
+.mode-btn { flex: 1; padding: 8px; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; background: transparent; color: var(--text3); transition: all 0.25s; font-family: inherit; }
 .mode-btn.active { background: var(--text); color: #000; }
 
-/* ===== CHECKLIST ITEMS ===== */
-.check-item {
-  display: flex; align-items: flex-start; gap: 14px;
-  padding: 13px 0; border-bottom: 1px solid var(--border);
-  cursor: pointer; -webkit-user-select: none; user-select: none;
-  transition: opacity 0.2s;
-}
+/* CHECK ITEMS (expandable) */
+.check-item { display: flex; align-items: flex-start; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--border); cursor: pointer; -webkit-user-select: none; user-select: none; transition: opacity 0.2s; }
 .check-item:last-child { border-bottom: none; }
 .check-item:active { opacity: 0.6; }
-.check-item.done { opacity: 0.3; }
+.check-item.done { opacity: 0.35; }
 .check-item.done .check-box { background: var(--text); border-color: var(--text); }
-.check-item.done .check-box::after {
-  content: ''; display: block; width: 5px; height: 9px;
-  border: solid #000; border-width: 0 2px 2px 0;
-  transform: rotate(45deg) translate(-1px, -1px);
-}
+.check-item.done .check-box::after { content: ''; display: block; width: 5px; height: 9px; border: solid #000; border-width: 0 2px 2px 0; transform: rotate(45deg) translate(-1px, -1px); }
 .check-item.done .check-text { text-decoration: line-through; color: var(--text3); }
-.check-box {
-  width: 22px; height: 22px; border-radius: 50%;
-  border: 1.5px solid var(--text3); flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.2s; margin-top: 1px;
-}
+.check-box { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--text3); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.2s; margin-top: 1px; }
+.check-content { flex: 1; min-width: 0; }
 .check-text { font-size: 15px; font-weight: 400; line-height: 1.35; }
 .check-sub { font-size: 12px; color: var(--text3); margin-top: 1px; }
+.check-detail { display: none; margin-top: 10px; padding: 14px; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid var(--border); font-size: 13px; color: var(--text2); line-height: 1.65; }
+.check-detail b { color: rgba(245,245,247,0.85); font-weight: 600; }
+.check-item.expanded .check-detail { display: block; }
+.check-arrow { color: var(--text3); font-size: 10px; flex-shrink: 0; margin-top: 6px; transition: transform 0.2s; padding: 4px; }
+.check-item.expanded .check-arrow { transform: rotate(180deg); }
 
-/* ===== SUPPLEMENT PILLS ===== */
+/* SUPPLEMENT PILLS */
 .supp-grid { display: flex; flex-wrap: wrap; gap: 6px; }
-.supp-pill {
-  padding: 7px 12px; background: var(--surface2); border-radius: 8px;
-  font-size: 13px; font-weight: 400; cursor: pointer; color: var(--text2);
-  transition: all 0.2s; -webkit-user-select: none; user-select: none;
-}
+.supp-pill { padding: 7px 12px; background: var(--surface2); border-radius: 8px; font-size: 13px; font-weight: 400; cursor: pointer; color: var(--text2); transition: all 0.2s; -webkit-user-select: none; user-select: none; }
 .supp-pill:active { opacity: 0.6; }
 .supp-pill.done { opacity: 0.2; text-decoration: line-through; }
 
-/* ===== MINI CHECK ===== */
-.mini-check {
-  display: flex; align-items: center; gap: 12px;
-  padding: 11px 0; border-bottom: 1px solid var(--border);
-  cursor: pointer; font-size: 14px; font-weight: 400;
-  -webkit-user-select: none; user-select: none; transition: opacity 0.2s;
-}
+/* MINI CHECK */
+.mini-check { display: flex; align-items: center; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--border); cursor: pointer; font-size: 14px; -webkit-user-select: none; user-select: none; transition: opacity 0.2s; }
 .mini-check:last-child { border-bottom: none; }
-.mini-check:active { opacity: 0.6; }
 .mini-check.done { opacity: 0.25; text-decoration: line-through; }
-.mini-box {
-  width: 20px; height: 20px; border-radius: 5px;
-  border: 1.5px solid var(--text3); flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center; transition: all 0.2s;
-}
+.mini-box { width: 20px; height: 20px; border-radius: 5px; border: 1.5px solid var(--text3); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
 .mini-check.done .mini-box { background: var(--text); border-color: var(--text); }
-.mini-check.done .mini-box::after {
-  content: ''; width: 5px; height: 8px;
-  border: solid #000; border-width: 0 2px 2px 0;
-  transform: rotate(45deg) translate(-1px, -1px);
-}
+.mini-check.done .mini-box::after { content: ''; width: 5px; height: 8px; border: solid #000; border-width: 0 2px 2px 0; transform: rotate(45deg) translate(-1px, -1px); }
 
-/* ===== TIMER ===== */
+/* TIMER */
 .timer-section { text-align: center; }
 .timer-label { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; }
-.timer-display {
-  font-size: 64px; font-weight: 200; font-variant-numeric: tabular-nums;
-  letter-spacing: -3px; margin: 4px 0 16px; color: var(--text);
-}
+.timer-display { font-size: 64px; font-weight: 200; font-variant-numeric: tabular-nums; letter-spacing: -3px; margin: 4px 0 8px; }
+.timer-sub { font-size: 11px; color: var(--text3); margin-bottom: 14px; }
 .timer-buttons { display: flex; gap: 8px; justify-content: center; }
-.timer-btn {
-  padding: 10px 32px; border: none; border-radius: 20px;
-  font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s;
-}
+.timer-btn { padding: 10px 32px; border: none; border-radius: 20px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: inherit; }
 .timer-btn:active { transform: scale(0.96); }
 .timer-btn-go { background: var(--text); color: #000; }
 .timer-btn-reset { background: var(--surface2); color: var(--text2); }
 
-/* ===== JOURNAL ===== */
+/* DAILY TARGETS */
+.daily-input { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--border); }
+.daily-input:last-child { border-bottom: none; }
+.daily-label { font-size: 14px; font-weight: 400; color: var(--text); flex: 1; }
+.daily-val { background: var(--surface2); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 6px 12px; color: var(--text); font-family: inherit; font-size: 14px; font-weight: 700; width: 60px; text-align: center; }
+.daily-val:focus { outline: none; border-color: rgba(245,245,247,0.3); }
+.daily-check { width: 22px; height: 22px; border: 1.5px solid var(--text3); border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.daily-check.done { background: var(--text); border-color: var(--text); }
+.daily-check.done::after { content: '✓'; color: #000; font-size: 12px; font-weight: 800; }
+.counter { display: flex; align-items: center; gap: 10px; }
+.counter-btn { width: 30px; height: 30px; border-radius: 50%; background: var(--surface2); border: 1px solid rgba(255,255,255,0.08); color: var(--text); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-family: inherit; }
+.counter-val { font-size: 18px; font-weight: 700; min-width: 24px; text-align: center; }
+
+/* PIPELINE */
+.pipe-item { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.pipe-item:last-child { border-bottom: none; }
+.pipe-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text2); flex-shrink: 0; }
+.pipe-text { font-weight: 400; color: var(--text); flex: 1; }
+.pipe-rm { cursor: pointer; color: var(--text3); font-size: 16px; padding: 0 4px; }
+.pipe-add { width: 100%; padding: 10px; background: transparent; border: 1px dashed rgba(255,255,255,0.1); border-radius: 10px; color: var(--text3); font-size: 12px; cursor: pointer; font-family: inherit; margin-top: 8px; transition: all 0.2s; }
+.pipe-add:hover { border-color: var(--text2); color: var(--text2); }
+
+/* STREAK GRID (30-day) */
+.streak-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.streak-day { aspect-ratio: 1; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 600; background: var(--surface2); color: var(--text3); }
+.streak-day.done { background: rgba(245,245,247,0.15); color: var(--text2); }
+.streak-day.missed { background: rgba(255,69,58,0.1); color: var(--red); }
+.streak-day.today { background: var(--text); color: #000; }
+
+/* JOURNAL */
 .journal-section { padding: 0 24px; margin-top: 24px; }
 .journal-card { margin-bottom: 24px; }
 .journal-label { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text3); margin-bottom: 8px; }
 .journal-prompt { font-size: 13px; color: var(--text3); margin-bottom: 10px; line-height: 1.45; }
-.journal-textarea {
-  width: 100%; min-height: 120px; background: var(--surface);
-  border: 1px solid var(--border); border-radius: 12px;
-  color: var(--text); font-family: inherit; font-size: 15px;
-  line-height: 1.6; padding: 14px; resize: vertical; outline: none;
-  transition: border-color 0.3s;
-}
+.journal-textarea { width: 100%; min-height: 100px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; color: var(--text); font-family: inherit; font-size: 15px; line-height: 1.6; padding: 14px; resize: vertical; outline: none; }
 .journal-textarea:focus { border-color: rgba(245,245,247,0.2); }
 .journal-textarea::placeholder { color: var(--text3); }
-.save-btn {
-  width: 100%; padding: 13px; border: none; border-radius: 12px;
-  font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 10px;
-  background: var(--text); color: #000; transition: all 0.2s;
-}
+.save-btn { width: 100%; padding: 13px; border: none; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 10px; background: var(--text); color: #000; font-family: inherit; transition: all 0.2s; }
 .save-btn:active { transform: scale(0.98); opacity: 0.8; }
-.past-entry {
-  background: var(--surface); border-radius: 10px;
-  padding: 12px; margin-top: 8px; font-size: 13px;
-  line-height: 1.5; color: var(--text2);
-}
+.save-btn.secondary { background: var(--surface2); color: var(--text2); }
+.prog-tag { background: var(--surface2); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 6px 14px; font-size: 11px; font-weight: 600; color: var(--text3); cursor: pointer; font-family: inherit; transition: all 0.2s; }
+.prog-tag.active { background: rgba(245,245,247,0.12); border-color: rgba(245,245,247,0.2); color: var(--text); }
+.past-entry { background: var(--surface); border-radius: 10px; padding: 12px; margin-top: 8px; font-size: 13px; line-height: 1.5; color: var(--text2); }
 .past-date { font-size: 11px; font-weight: 600; color: var(--text3); margin-bottom: 4px; }
 
-/* ===== PAGES ===== */
+/* EXPOSURE */
+.exp-level { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); cursor: pointer; }
+.exp-level:last-child { border-bottom: none; }
+.exp-num { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0; }
+.exp-num.locked { background: var(--surface2); color: var(--text3); border: 1px solid var(--border); }
+.exp-num.current { background: var(--text); color: #000; box-shadow: 0 0 20px rgba(245,245,247,0.15); }
+.exp-num.complete { background: var(--green); color: #fff; }
+.exp-info { flex: 1; min-width: 0; }
+.exp-name { font-size: 13px; font-weight: 600; }
+.exp-target { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.exp-reps { font-size: 12px; color: var(--text2); font-weight: 600; flex-shrink: 0; }
+.exp-detail { display: none; margin-top: 8px; padding: 10px 12px; background: rgba(255,255,255,0.03); border-radius: 8px; font-size: 12px; color: var(--text2); line-height: 1.6; }
+.exp-level.expanded .exp-detail { display: block; }
+.log-form textarea { width: 100%; min-height: 60px; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; color: var(--text); font-family: inherit; font-size: 13px; resize: vertical; outline: none; }
+.log-form textarea:focus { border-color: rgba(245,245,247,0.2); }
+.log-form select { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; color: var(--text); font-family: inherit; font-size: 13px; width: 100%; outline: none; }
+.log-btn { width: 100%; padding: 12px; background: var(--text); color: #000; border: none; border-radius: 12px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; margin-top: 8px; }
+.rep-entry { padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
+.rep-entry:last-child { border-bottom: none; }
+.rep-meta { display: flex; justify-content: space-between; color: var(--text3); margin-bottom: 3px; }
+.rep-note { color: var(--text2); }
+
+/* IDENTITY */
+.id-section { margin-bottom: 24px; }
+.id-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text3); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.id-block { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px; margin-bottom: 8px; }
+.id-block-title { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.id-block-text { font-size: 13px; line-height: 1.8; color: var(--text2); }
+.id-block-text b { color: rgba(245,245,247,0.85); font-weight: 600; }
+.id-highlight { background: linear-gradient(135deg, rgba(245,245,247,0.06), rgba(245,245,247,0.02)); border-color: rgba(245,245,247,0.12); }
+.scene { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px; margin-bottom: 8px; cursor: pointer; }
+.scene-num { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--text3); margin-bottom: 4px; }
+.scene-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.scene-preview { font-size: 12px; color: var(--text3); }
+.scene-full { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 13px; line-height: 1.8; color: var(--text2); }
+.scene-full b { color: rgba(245,245,247,0.85); font-weight: 600; }
+.scene.open .scene-full { display: block; }
+.scene.open .scene-preview { display: none; }
+.prog-card { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.prog-card:last-child { border-bottom: none; }
+.prog-num { width: 28px; height: 28px; border-radius: 8px; background: var(--surface2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--text3); flex-shrink: 0; }
+.prog-name { font-size: 13px; font-weight: 600; }
+.prog-desc { font-size: 11px; color: var(--text3); margin-top: 1px; }
+.rule { padding: 12px 0; border-bottom: 1px solid var(--border); }
+.rule:last-child { border-bottom: none; }
+.rule-num { font-size: 9px; font-weight: 700; color: var(--text3); letter-spacing: 1.5px; margin-bottom: 3px; }
+.rule-text { font-size: 13px; line-height: 1.7; color: var(--text2); }
+
+/* PAGES + NAV */
 .page { display: none; }
 .page.active { display: block; }
-
-/* ===== BOTTOM NAV ===== */
-.bottom-nav {
-  position: fixed; bottom: 0; left: 0; right: 0;
-  display: flex; justify-content: space-around;
-  padding: 8px 0 calc(8px + var(--safe-bottom));
-  background: rgba(0,0,0,0.94);
-  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-  border-top: 1px solid var(--border); z-index: 100;
-}
-.nav-btn {
-  display: flex; flex-direction: column; align-items: center; gap: 2px;
-  background: none; border: none; color: var(--text3);
-  font-size: 10px; font-weight: 500; cursor: pointer;
-  padding: 4px 16px; transition: color 0.2s;
-}
+.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; display: flex; justify-content: space-around; padding: 8px 0 calc(8px + var(--safe-bottom)); background: rgba(0,0,0,0.94); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-top: 1px solid var(--border); z-index: 100; }
+.nav-btn { display: flex; flex-direction: column; align-items: center; gap: 2px; background: none; border: none; color: var(--text3); font-size: 10px; font-weight: 500; cursor: pointer; padding: 4px 12px; transition: color 0.2s; font-family: inherit; }
 .nav-btn.active { color: var(--text); }
-.nav-icon { font-size: 20px; }
+.nav-icon { font-size: 18px; }
 
-/* ===== MOBILE LAYOUT (default) ===== */
+/* MOBILE DEFAULT */
 .bento-grid { padding: 20px 24px 0; }
-.bento-card { margin-bottom: 12px; }
-.bento-card .section-title { margin-bottom: 12px; }
+.page-content { padding: 0 24px; }
 
-/* ===== DESKTOP BENTO LAYOUT ===== */
+/* DESKTOP BENTO */
 @media (min-width: 768px) {
   body { padding-bottom: 40px; }
   .header { padding: 24px 40px 18px; max-width: 1200px; margin: 0 auto; }
   .header-greeting { font-size: 36px; }
   .bottom-nav { display: none; }
-  .mode-bar { max-width: 1200px; margin: 28px auto 0; padding: 3px; }
-
-  .bento-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px 40px 40px;
-  }
-
+  .mode-bar { max-width: 1200px; margin: 28px auto 0; }
+  .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 1200px; margin: 0 auto; padding: 20px 40px 40px; }
   .bento-card { margin-bottom: 0; }
-
-  /* Spanning rules */
-  .bento-progress { grid-column: 1; }
-  .bento-streak { grid-column: 2; }
-  .bento-rule { grid-column: 3; }
-  .bento-timer { grid-column: 1; }
-  .bento-morning { grid-column: 2 / 4; grid-row: span 2; }
-  .bento-supp-morning { grid-column: 1 / 3; }
-  .bento-discomfort { grid-column: 3; }
-  .bento-supp-midday { grid-column: 1; }
-  .bento-supp-pre { grid-column: 2; }
-  .bento-skincare { grid-column: 3; }
-  .bento-restorex { grid-column: 1; }
-  .bento-supp-evening { grid-column: 2; }
-  .bento-evening { grid-column: 3; grid-row: span 2; }
-  .bento-supp-bedtime { grid-column: 1 / 3; }
-  .bento-stacks { grid-column: 1 / 4; }
-
-  /* Desktop nav as top tabs */
-  .desktop-nav {
-    display: flex; gap: 32px; max-width: 1200px; margin: 0 auto;
-    padding: 0 40px;
-  }
-  .desktop-nav button {
-    background: none; border: none; color: var(--text3);
-    font-size: 14px; font-weight: 600; cursor: pointer;
-    padding: 12px 0; border-bottom: 2px solid transparent;
-    transition: all 0.2s;
-  }
-  .desktop-nav button.active {
-    color: var(--text); border-bottom-color: var(--text);
-  }
-
+  .b-wide { grid-column: span 2; }
+  .b-full { grid-column: 1 / -1; }
+  .desktop-nav { display: flex; gap: 32px; max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+  .desktop-nav button { background: none; border: none; color: var(--text3); font-size: 14px; font-weight: 600; cursor: pointer; padding: 12px 0; border-bottom: 2px solid transparent; transition: all 0.2s; font-family: inherit; }
+  .desktop-nav button.active { color: var(--text); border-bottom-color: var(--text); }
   .journal-section { max-width: 1200px; margin: 24px auto 0; padding: 0 40px; }
-  .journal-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
-  }
+  .journal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
   .journal-grid .journal-card { margin-bottom: 0; }
+  .page-content { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
 }
-
-@media (min-width: 768px) {
-  .mobile-only { display: none; }
-  .desktop-only { display: flex; }
-}
-@media (max-width: 767px) {
-  .desktop-only { display: none !important; }
-}
-
+@media (min-width: 768px) { .mobile-only { display: none; } .desktop-only { display: flex; } }
+@media (max-width: 767px) { .desktop-only { display: none !important; } }
 ::-webkit-scrollbar { width: 0; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-.bento-card { animation: fadeIn 0.3s ease; }
 </style>
 </head>
 <body>
@@ -314,73 +255,137 @@ body {
   <div class="header-sub" id="headerSub">Day 1</div>
 </div>
 
-<!-- ===== TODAY PAGE ===== -->
+<!-- ═══════════ PAGE: TODAY ═══════════ -->
 <div id="page-today" class="page active">
 
   <!-- Desktop Nav -->
   <div class="desktop-only desktop-nav">
     <button class="active" data-page="page-today">Today</button>
+    <button data-page="page-exposure">Exposure</button>
+    <button data-page="page-identity">2.0</button>
     <button data-page="page-history">History</button>
   </div>
 
-  <!-- MODE TOGGLE -->
+  <!-- Mode Toggle -->
   <div class="mode-bar">
     <button class="mode-btn active" data-mode="checklist">Checklist</button>
     <button class="mode-btn" data-mode="journal">Journal</button>
   </div>
 
-  <!-- ===== CHECKLIST MODE ===== -->
+  <!-- ══ CHECKLIST MODE ══ -->
   <div id="mode-checklist">
-
     <div class="bento-grid">
 
       <!-- PROGRESS -->
-      <div class="bento-card bento-progress">
+      <div class="bento-card">
         <div class="section-title">Progress</div>
         <div class="progress-label" id="progressPct">0%</div>
-        <div class="progress-bar-wrap" style="margin-top:8px">
-          <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-        </div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
       </div>
 
-      <!-- STREAK -->
-      <div class="bento-card bento-streak">
+      <!-- 14-DAY STREAK -->
+      <div class="bento-card">
         <div class="section-title">14-Day Streak</div>
-        <div class="streak-row" id="streakRow"></div>
+        <div class="streak-row" id="streakRow14"></div>
       </div>
 
-      <!-- DAILY RULE -->
-      <div class="bento-card bento-rule">
+      <!-- TODAY'S RULE -->
+      <div class="bento-card">
         <div class="section-title">Today's Rule</div>
-        <div class="daily-rule-text" id="dailyRule"></div>
+        <div class="daily-rule" id="dailyRule"></div>
       </div>
 
-      <!-- TIMER -->
-      <div class="bento-card bento-timer">
+      <!-- MORNING STATEMENT -->
+      <div class="bento-card b-wide statement-card" id="morningStatementCard">
+        <div class="section-title">Morning Statement — Read Aloud</div>
+        <div class="statement-text" id="morningDisplay"></div>
+        <div class="statement-edit" id="morningEdit" style="display:none">
+          <textarea class="statement-input" id="morningInput"></textarea>
+          <button class="statement-save" onclick="saveStatement('morning')">Save</button>
+        </div>
+        <div class="statement-hint" onclick="editStatement('morning')">Tap to edit</div>
+      </div>
+
+      <!-- 3-SECOND TIMER -->
+      <div class="bento-card">
         <div class="timer-section">
-          <div class="timer-label">5-Second Rule</div>
-          <div class="timer-display" id="timerDisplay">5.0</div>
+          <div class="timer-label">3-Second Override</div>
+          <div class="timer-display" id="timerDisplay">3.0</div>
+          <div class="timer-sub">Feet move before programs boot</div>
           <div class="timer-buttons">
-            <button class="timer-btn timer-btn-go" id="timerStart">Go</button>
+            <button class="timer-btn timer-btn-go" id="timerStart">GO</button>
             <button class="timer-btn timer-btn-reset" id="timerReset">Reset</button>
           </div>
         </div>
       </div>
 
       <!-- MORNING PROTOCOL -->
-      <div class="bento-card bento-morning" id="sec-morning">
-        <div class="section-title">Morning Protocol</div>
-        <div class="check-item" data-key="m1"><div class="check-box"></div><div><div class="check-text">Wim Hof Breathing</div><div class="check-sub">3 rounds, 30 breaths each</div></div></div>
-        <div class="check-item" data-key="m2"><div class="check-box"></div><div><div class="check-text">Nadi Shodhana</div><div class="check-sub">Alternate nostril, 5 min</div></div></div>
-        <div class="check-item" data-key="m3"><div class="check-box"></div><div><div class="check-text">Kapalabhati</div><div class="check-sub">Skull-shining breath, 3 min</div></div></div>
-        <div class="check-item" data-key="m4"><div class="check-box"></div><div><div class="check-text">Visualization</div><div class="check-sub">10 min, sovereign state priming</div></div></div>
-        <div class="check-item" data-key="m5"><div class="check-box"></div><div><div class="check-text">Third-Person Scripting</div><div class="check-sub">5 min, write today's narrative</div></div></div>
-        <div class="check-item" data-key="m6"><div class="check-box"></div><div><div class="check-text">Cold Shower</div><div class="check-sub">2+ minutes, full cold</div></div></div>
-        <div class="check-item" data-key="m7"><div class="check-box"></div><div><div class="check-text">Power Posture</div><div class="check-sub">2 min, expansive stance</div></div></div>
+      <div class="bento-card b-wide">
+        <div class="section-title">Morning Protocol <span class="badge" id="morningBadge">0/6</span></div>
+
+        <div class="check-item" data-key="m1" onclick="handleCheck(event,this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">Wake. No phone. Sunlight.</div>
+            <div class="check-sub">2 min</div>
+            <div class="check-detail">Eyes open → feet on floor → <b>DO NOT touch your phone</b>. Walk to window or balcony. Get direct sunlight in your eyes (no sunglasses) for 2 minutes. Resets circadian clock, kickstarts cortisol.<br><br>Your phone is cheap dopamine. The first thing you consume sets the neurochemical tone for the day. <b>You set the tone. Not Instagram.</b></div>
+          </div>
+          <div class="check-arrow">▾</div>
+        </div>
+
+        <div class="check-item" data-key="m2" onclick="handleCheck(event,this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">Wim Hof Breathwork — 3 rounds</div>
+            <div class="check-sub">12 min</div>
+            <div class="check-detail"><b>One round:</b> 30 deep breaths — inhale fully (belly → chest), let go. Repeat 30x fast. After last exhale, <b>hold breath</b> until you feel the urge. One deep recovery breath, hold 15s, release. Do 3 rounds.<br><br><b>During holds:</b> eyes closed, repeat: <b>"I am Wilcot 2.0. I don't need permission to take up space. I am the proof."</b><br><br><b>What's happening:</b> Blood pH rises → adrenaline + norepinephrine flood → 300% norepinephrine increase. You're chemically manufacturing the state that normally requires a big win. <b>You're charging your own battery.</b></div>
+          </div>
+          <div class="check-arrow">▾</div>
+        </div>
+
+        <div class="check-item" data-key="m3" onclick="handleCheck(event,this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">Cold Shower — full cold, 2-3 min</div>
+            <div class="check-sub">3 min</div>
+            <div class="check-detail">No warm start. <b>Full cold immediately.</b> First 30 seconds are hardest — breathe deliberately. Slow exhales. Stay until you stop fighting.<br><br><b>What's happening:</b> 250% sustained dopamine increase (stays elevated for hours). Same neurochemistry as peak confidence after a big win — except you made it in your bathroom.<br><br><b>The deeper point:</b> Every morning you do something hard before the world asks. Trains the circuit: <b>discomfort ≠ danger</b>. Same circuit that fires when you approach a stranger.</div>
+          </div>
+          <div class="check-arrow">▾</div>
+        </div>
+
+        <div class="check-item" data-key="m4" onclick="handleCheck(event,this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">Theater of the Mind — Visualization</div>
+            <div class="check-sub">10-15 min</div>
+            <div class="check-detail">Sit or lie down. Eyes closed. <b>Your brain cannot fully distinguish vividly imagined experience from real experience</b> (Maltz, fMRI confirmed).<br><br><b>Run 3-5 scenes, first person — through YOUR eyes:</b><br>• <b>The Room:</b> Walk into a bar. Pause at entrance. Scan with calm curiosity. Sit at the bar. Alone and fine.<br>• <b>The Approach:</b> See her. 3 seconds. Feet move. "Hey, you caught my eye." Feel the ease. Zero attachment.<br>• <b>The Rejection:</b> "I have a boyfriend." You smile. "Fair enough." Walk away. Feel nothing. Not suppressed nothing — real nothing.<br>• <b>Free form:</b> Today's specific challenge. Business call. Walking through a crowd.<br><br><b>ALL senses engaged.</b> Sounds, smells, air on skin. <b>FEEL the emotion as if happening NOW.</b> This is how Olympic athletes train. 10-15 min = dozens of reps your nervous system treats as real.</div>
+          </div>
+          <div class="check-arrow">▾</div>
+        </div>
+
+        <div class="check-item" data-key="m5" onclick="handleCheck(event,this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">Identity Activation — Third person script</div>
+            <div class="check-sub">2 min</div>
+            <div class="check-detail">Speak out loud or write. <b>Third person</b> — "Wilcot" not "I". Creates psychological distance from current self-image.<br><br><b>Template:</b> "Wilcot walks into today calm and grounded. He doesn't seek approval. He speaks directly. He handles [today's challenge] without hesitation. He approaches what interests him. He is magnetic because he is full." <b>Make it specific to today's actual schedule.</b></div>
+          </div>
+          <div class="check-arrow">▾</div>
+        </div>
+
+        <div class="check-item" data-key="m6" onclick="handleCheck(event,this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">Stack + Go — Build</div>
+            <div class="check-sub">Take stack, then build</div>
+            <div class="check-detail">Take your morning stack. Then <b>go build</b>. Piexels. TwoPointO. Whatever's on fire. The morning protocol charged you — <b>spend that charge on building, not scrolling.</b><br><br>You don't "go to work." You're a builder executing on something exciting. Every hour of deep work = one hour the programs can't reach you (flow suppresses DMN). <b>Building IS the vacancy killer.</b></div>
+          </div>
+          <div class="check-arrow">▾</div>
+        </div>
       </div>
 
-      <!-- MORNING SUPPLEMENTS -->
-      <div class="bento-card bento-supp-morning" id="sec-supp-morning">
+      <!-- MORNING STACK -->
+      <div class="bento-card">
         <div class="section-title">Morning Stack</div>
         <div class="supp-grid" id="suppMorning">
           <div class="supp-pill" data-key="s_ashwa">Ashwagandha 300mg</div>
@@ -402,48 +407,94 @@ body {
         </div>
       </div>
 
-      <!-- DAILY DISCOMFORT -->
-      <div class="bento-card bento-discomfort" id="sec-discomfort">
-        <div class="section-title">Daily Discomfort</div>
-        <div class="check-item" data-key="d1"><div class="check-box"></div><div><div class="check-text">Eye contact, 5 strangers</div></div></div>
-        <div class="check-item" data-key="d2"><div class="check-box"></div><div><div class="check-text">Small talk, 1 person</div></div></div>
-        <div class="check-item" data-key="d3"><div class="check-box"></div><div><div class="check-text">1 genuine compliment</div></div></div>
+      <!-- DAILY TARGETS -->
+      <div class="bento-card">
+        <div class="section-title">Daily Targets</div>
+        <div class="daily-input"><div class="daily-label">Deep work (hours)</div><input type="number" class="daily-val" id="dailyWork" value="0" min="0" max="16" onchange="saveDay()"></div>
+        <div class="daily-input"><div class="daily-label">Training</div><div class="daily-check" id="dailyTrain" onclick="toggleDailyCheck(this,'trained')"></div></div>
+        <div class="daily-input"><div class="daily-label">3-sec overrides</div><div class="counter"><button class="counter-btn" onclick="adjustCounter(-1)">−</button><div class="counter-val" id="overrideCount">0</div><button class="counter-btn" onclick="adjustCounter(1)">+</button></div></div>
+        <div class="daily-input"><div class="daily-label">Zero cheap dopamine</div><div class="daily-check" id="dailyDopamine" onclick="toggleDailyCheck(this,'zeroDopamine')"></div></div>
       </div>
 
-      <!-- MIDDAY STACK -->
-      <div class="bento-card bento-supp-midday" id="sec-supp-midday">
+      <!-- DAILY DISCOMFORT -->
+      <div class="bento-card">
+        <div class="section-title">Daily Discomfort</div>
+        <div class="check-item" data-key="d1" onclick="handleCheck(event,this)"><div class="check-box"></div><div class="check-content"><div class="check-text">Eye contact, 5 strangers</div></div></div>
+        <div class="check-item" data-key="d2" onclick="handleCheck(event,this)"><div class="check-box"></div><div class="check-content"><div class="check-text">Small talk, 1 person</div></div></div>
+        <div class="check-item" data-key="d3" onclick="handleCheck(event,this)"><div class="check-box"></div><div class="check-content"><div class="check-text">1 genuine compliment</div></div></div>
+      </div>
+
+      <!-- MIDDAY + PRE-WORKOUT -->
+      <div class="bento-card">
         <div class="section-title">Midday Stack</div>
         <div class="supp-grid" id="suppMidday">
           <div class="supp-pill" data-key="s_agpc_mid">Alpha-GPC 300mg</div>
           <div class="supp-pill" data-key="s_nac_mid">NAC 600mg</div>
           <div class="supp-pill" data-key="s_basil_mid">Holy Basil 300mg</div>
         </div>
-      </div>
-
-      <!-- PRE-WORKOUT -->
-      <div class="bento-card bento-supp-pre" id="sec-supp-preworkout">
-        <div class="section-title">Pre-Workout</div>
-        <div class="supp-grid" id="suppPreWorkout">
+        <div class="section-title" style="margin-top:16px">Pre-Workout</div>
+        <div class="supp-grid" id="suppPre">
           <div class="supp-pill" data-key="s_citmal">Citrulline Malate 6-8g</div>
           <div class="supp-pill" data-key="s_beta">Beta-Alanine 4g</div>
         </div>
       </div>
 
-      <!-- SKINCARE -->
-      <div class="bento-card bento-skincare" id="sec-skincare">
-        <div class="section-title">Skincare</div>
-        <div class="mini-check" data-key="skin_am"><div class="mini-box"></div>AM (SPF + Vitamin C)</div>
-        <div class="mini-check" data-key="skin_pm"><div class="mini-box"></div>PM (Retinol + Moisturizer)</div>
+      <!-- EVENING STATEMENT -->
+      <div class="bento-card b-wide statement-card" id="eveningStatementCard">
+        <div class="section-title">Evening Statement — Theta Installation</div>
+        <div class="statement-text" id="eveningDisplay"></div>
+        <div class="statement-edit" id="eveningEdit" style="display:none">
+          <textarea class="statement-input" id="eveningInput"></textarea>
+          <button class="statement-save" onclick="saveStatement('evening')">Save</button>
+        </div>
+        <div class="statement-hint" onclick="editStatement('evening')">Tap to edit</div>
       </div>
 
-      <!-- RESTOREX -->
-      <div class="bento-card bento-restorex" id="sec-restorex">
-        <div class="section-title">RestoreX</div>
-        <div class="mini-check" data-key="restorex"><div class="mini-box"></div>30 min session</div>
+      <!-- PIPELINE -->
+      <div class="bento-card">
+        <div class="section-title">Pipeline <span class="badge" id="pipeBadge">0/3</span></div>
+        <div id="pipelineList"></div>
+        <button class="pipe-add" onclick="addPipeline()">+ Add something exciting</button>
+        <div style="font-size:11px;color:var(--text3);margin-top:6px;line-height:1.4">Keep 3+ exciting things in the pipeline. Your ADHD brain runs on anticipation.</div>
       </div>
 
-      <!-- EVENING SUPPLEMENTS -->
-      <div class="bento-card bento-supp-evening" id="sec-supp-evening">
+      <!-- EVENING PROTOCOL -->
+      <div class="bento-card b-wide">
+        <div class="section-title">Evening Protocol <span class="badge" id="eveningBadge">0/3</span></div>
+
+        <div class="check-item" data-key="e1" onclick="handleCheck(event,this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">Evidence Log — 3 wins from today</div>
+            <div class="check-sub">3 min</div>
+            <div class="check-detail">Write 3 things you did today that <b>Wilcot 2.0 would do</b>. Not big things. Moments where you acted without the filter, kept a promise, or overrode a program.<br><br>Examples: "Complimented barista." "6 hours deep without IG." "Sat at lunch alone, phone in pocket."<br><br><b>Confidence = evidence.</b> Every entry is a data point your brain can't deny. After 30 days = 90 data points proving you ARE 2.0. Switch to Journal mode to log them.</div>
+          </div>
+          <div class="check-arrow">▾</div>
+        </div>
+
+        <div class="check-item" data-key="e2" onclick="handleCheck(event,this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">Program Tag Review</div>
+            <div class="check-sub">2 min</div>
+            <div class="check-detail">Which programs fired today?<br><b>P1 Social Proof:</b> Needed witnesses? Avoided being seen alone?<br><b>P2 External Battery:</b> Sought validation? Checked story views?<br><b>P3 Visible Effort:</b> Held back from looking like you're trying?<br><b>P4 Height:</b> The loop fired? In what context?<br><b>P5 Money:</b> Stress triggered insecurity?<br><br><b>Just notice.</b> Tag them. The tagging creates distance. You become the observer, not the host. Switch to Journal mode to tag them.</div>
+          </div>
+          <div class="check-arrow">▾</div>
+        </div>
+
+        <div class="check-item" data-key="e3" onclick="handleCheck(event,this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">Theta Installation — Napoleon Hill</div>
+            <div class="check-sub">5 min · before sleep</div>
+            <div class="check-detail">Lie in bed. Lights off. Eyes closed.<br><br><b>1.</b> Body scan — relax from feet to head. Let each part get heavy. 2 min.<br><b>2.</b> Reach theta — between awake and asleep. Critical filter is DOWN.<br><b>3.</b> In this state, <b>feel</b> (don't just think):<br>— "I walk into any room and own it."<br>— "I don't need anyone to prove my value. I am the proof."<br>— "I am complete on my own. A girl is a bonus, not a need."<br>— "I am magnetic because I am full."<br><b>4.</b> Visualize tomorrow as 2.0. Specific. Vivid.<br><b>5.</b> Fall asleep holding the feeling.<br><br>Every night = a software update. The conscious mind's resistance is offline. <b>The belief writes directly to the operating system.</b></div>
+          </div>
+          <div class="check-arrow">▾</div>
+        </div>
+      </div>
+
+      <!-- EVENING + BEDTIME STACK -->
+      <div class="bento-card">
         <div class="section-title">Evening Stack</div>
         <div class="supp-grid" id="suppEvening">
           <div class="supp-pill" data-key="s_omega_pm">Omega-3 1g</div>
@@ -452,20 +503,7 @@ body {
           <div class="supp-pill" data-key="s_zinc">Zinc + Copper</div>
           <div class="supp-pill" data-key="s_hg_pm">Holy Grail PM</div>
         </div>
-      </div>
-
-      <!-- EVENING PROTOCOL -->
-      <div class="bento-card bento-evening" id="sec-evening">
-        <div class="section-title">Evening Protocol</div>
-        <div class="check-item" data-key="e1"><div class="check-box"></div><div><div class="check-text">Win Stacking</div><div class="check-sub">Journal your wins</div></div></div>
-        <div class="check-item" data-key="e2"><div class="check-box"></div><div><div class="check-text">Sovereign Reframe</div><div class="check-sub">Reframe one insecurity</div></div></div>
-        <div class="check-item" data-key="e3"><div class="check-box"></div><div><div class="check-text">Mirror Work</div><div class="check-sub">2 min, self-compassion</div></div></div>
-        <div class="check-item" data-key="e4"><div class="check-box"></div><div><div class="check-text">Memory Implant</div><div class="check-sub">Visualize best moment</div></div></div>
-      </div>
-
-      <!-- BEDTIME STACK -->
-      <div class="bento-card bento-supp-bedtime" id="sec-supp-bedtime">
-        <div class="section-title">Bedtime Stack</div>
+        <div class="section-title" style="margin-top:16px">Bedtime Stack</div>
         <div class="supp-grid" id="suppBedtime">
           <div class="supp-pill" data-key="s_ashwa_bed">Ashwagandha 300mg</div>
           <div class="supp-pill" data-key="s_magg">Mag Glycinate 300mg</div>
@@ -478,288 +516,629 @@ body {
       </div>
 
       <!-- STACK CHECKOFF -->
-      <div class="bento-card bento-stacks">
+      <div class="bento-card b-full">
         <div class="section-title">Stack Checkoff</div>
         <div style="display:flex;flex-wrap:wrap;gap:0 24px">
-          <div class="mini-check" data-key="stack_morning" style="flex:1;min-width:200px"><div class="mini-box"></div>Morning stack</div>
-          <div class="mini-check" data-key="stack_midday" style="flex:1;min-width:200px"><div class="mini-box"></div>Midday stack</div>
-          <div class="mini-check" data-key="stack_preworkout" style="flex:1;min-width:200px"><div class="mini-box"></div>Pre-workout stack</div>
-          <div class="mini-check" data-key="stack_evening" style="flex:1;min-width:200px"><div class="mini-box"></div>Evening stack</div>
-          <div class="mini-check" data-key="stack_bedtime" style="flex:1;min-width:200px"><div class="mini-box"></div>Bedtime stack</div>
+          <div class="mini-check" data-key="stack_morning" onclick="handleMiniCheck(this)" style="flex:1;min-width:160px"><div class="mini-box"></div>Morning stack</div>
+          <div class="mini-check" data-key="stack_midday" onclick="handleMiniCheck(this)" style="flex:1;min-width:160px"><div class="mini-box"></div>Midday stack</div>
+          <div class="mini-check" data-key="stack_pre" onclick="handleMiniCheck(this)" style="flex:1;min-width:160px"><div class="mini-box"></div>Pre-workout</div>
+          <div class="mini-check" data-key="stack_evening" onclick="handleMiniCheck(this)" style="flex:1;min-width:160px"><div class="mini-box"></div>Evening stack</div>
+          <div class="mini-check" data-key="stack_bedtime" onclick="handleMiniCheck(this)" style="flex:1;min-width:160px"><div class="mini-box"></div>Bedtime stack</div>
         </div>
       </div>
 
-    </div><!-- /bento-grid -->
+      <!-- 30-DAY STREAK -->
+      <div class="bento-card b-full">
+        <div class="section-title">30-Day Streak</div>
+        <div class="streak-grid" id="streakGrid30"></div>
+      </div>
 
-  </div><!-- /mode-checklist -->
+    </div>
+  </div>
 
-  <!-- ===== JOURNAL MODE ===== -->
+  <!-- ══ JOURNAL MODE ══ -->
   <div id="mode-journal" style="display:none">
     <div class="journal-section">
       <div class="journal-grid">
+
         <div class="journal-card">
-          <div class="journal-label">Win Stacking</div>
-          <div class="journal-prompt">What took courage, effort, or discipline today?</div>
-          <textarea class="journal-textarea" id="winJournal" placeholder="1. Held eye contact with...&#10;2. Spoke up when...&#10;3. Trained even though..."></textarea>
-          <button class="save-btn" onclick="saveJournal('wins')">Save Wins</button>
-          <div id="pastWins"></div>
+          <div class="journal-label">Evidence — 3 things 2.0 did today</div>
+          <div class="journal-prompt">What did you do today that Wilcot 2.0 would do? Be specific.</div>
+          <textarea class="journal-textarea" id="jEvidence" placeholder="1. Held eye contact with the cashier&#10;2. Worked 6 hours deep, no IG&#10;3. Sat at lunch alone, phone in pocket"></textarea>
+          <button class="save-btn" onclick="saveJournal('evidence')">Save Evidence</button>
+          <div id="pastEvidence"></div>
         </div>
+
         <div class="journal-card">
           <div class="journal-label">Sovereign Reframe</div>
-          <div class="journal-prompt">Take a moment of insecurity. Write the Sovereign interpretation.</div>
-          <textarea class="journal-textarea" id="reframeJournal" placeholder="Situation: She didn't respond...&#10;Old: Maybe I'm not interesting enough&#10;Sovereign: Not my task. I showed up authentically."></textarea>
+          <div class="journal-prompt">Take a moment of insecurity. Write the 2.0 interpretation.</div>
+          <textarea class="journal-textarea" id="jReframe" placeholder="Situation: She didn't respond...&#10;Old: Maybe I'm not interesting enough&#10;2.0: Not my task. I showed up. Her response is about her, not me."></textarea>
           <button class="save-btn" onclick="saveJournal('reframes')">Save Reframe</button>
           <div id="pastReframes"></div>
         </div>
+
         <div class="journal-card">
-          <div class="journal-label">Exposure Log</div>
+          <div class="journal-label">Exposure Notes</div>
           <div class="journal-prompt">Log any social exposure reps from today.</div>
-          <textarea class="journal-textarea" id="exposureJournal" placeholder="Level 4: Complimented the barista...&#10;Felt: 7/10"></textarea>
+          <textarea class="journal-textarea" id="jExposure" placeholder="Level 4: Sat alone at the rooftop bar for 40 min...&#10;Felt: 7/10&#10;Prediction vs reality: thought I'd feel anxious, actually felt calm"></textarea>
           <button class="save-btn" onclick="saveJournal('exposure')">Save Exposure</button>
           <div id="pastExposure"></div>
         </div>
+
+        <div class="journal-card">
+          <div class="journal-label">Win Stacking</div>
+          <div class="journal-prompt">What took courage, effort, or discipline today?</div>
+          <textarea class="journal-textarea" id="jWins" placeholder="1. Cold shower without hesitation&#10;2. Spoke up in the meeting&#10;3. Trained even though tired"></textarea>
+          <button class="save-btn" onclick="saveJournal('wins')">Save Wins</button>
+          <div id="pastWins"></div>
+        </div>
+
+        <div class="journal-card">
+          <div class="journal-label">Program Tags</div>
+          <div class="journal-prompt">Which programs activated today? Tag them.</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">
+            <button class="prog-tag" data-prog="P1" onclick="this.classList.toggle('active')">P1 Social Proof</button>
+            <button class="prog-tag" data-prog="P2" onclick="this.classList.toggle('active')">P2 External Battery</button>
+            <button class="prog-tag" data-prog="P3" onclick="this.classList.toggle('active')">P3 Visible Effort</button>
+            <button class="prog-tag" data-prog="P4" onclick="this.classList.toggle('active')">P4 Height</button>
+            <button class="prog-tag" data-prog="P5" onclick="this.classList.toggle('active')">P5 Money</button>
+          </div>
+          <textarea class="journal-textarea" id="jProgNote" placeholder="Context: when did they fire? What triggered them?" style="min-height:70px"></textarea>
+          <button class="save-btn secondary" onclick="savePrograms()">Log Programs</button>
+        </div>
+
+        <div class="journal-card">
+          <div class="journal-label">Free Notes</div>
+          <div class="journal-prompt">Anything else on your mind today.</div>
+          <textarea class="journal-textarea" id="jNotes" placeholder="Thoughts, ideas, observations..."></textarea>
+          <button class="save-btn" onclick="saveJournal('notes')">Save Notes</button>
+        </div>
+
       </div>
     </div>
-  </div><!-- /mode-journal -->
+  </div>
 
-</div><!-- /page-today -->
+</div>
 
-<!-- ===== HISTORY PAGE ===== -->
-<div id="page-history" class="page">
-  <div style="padding:24px;max-width:1200px;margin:0 auto">
-    <div style="font-size:28px;font-weight:700;letter-spacing:-0.5px;margin-bottom:24px">History</div>
-    <div id="historyList"></div>
+<!-- ═══════════ PAGE: EXPOSURE ═══════════ -->
+<div id="page-exposure" class="page">
+  <div class="page-content" style="padding-top:24px">
+    <div style="font-size:28px;font-weight:700;letter-spacing:-0.5px;margin-bottom:4px">Level <span id="expLevelTitle">1</span></div>
+    <div style="font-size:14px;color:var(--text3);margin-bottom:20px">Stay at each level until it's <b>BORING</b> — not just tolerable. 3-7 days per level.</div>
+
+    <div class="bento-card" style="padding:10px 18px">
+      <div id="exposureLevels"></div>
+    </div>
+
+    <div class="bento-card" style="margin-top:12px">
+      <div class="section-title">Log Today's Rep</div>
+      <div class="log-form">
+        <select id="repLevel" style="margin-bottom:8px"></select>
+        <textarea id="repNote" placeholder="What happened? What did you predict vs reality?"></textarea>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:8px">
+          <span style="font-size:12px;color:var(--text3)">Feel:</span>
+          <input type="range" id="repFeel" min="1" max="10" value="5" style="flex:1;accent-color:var(--text)">
+          <span style="font-size:12px;color:var(--text2);min-width:20px;text-align:right" id="repFeelVal">5</span>
+        </div>
+        <button class="log-btn" onclick="logRep()">LOG REP</button>
+      </div>
+    </div>
+
+    <div class="bento-card" style="margin-top:12px">
+      <div class="section-title">Recent Reps</div>
+      <div id="recentReps" style="max-height:300px;overflow-y:auto">
+        <div style="font-size:12px;color:var(--text3);padding:8px 0">No reps yet. Go do something uncomfortable.</div>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- BOTTOM NAV (mobile only) -->
+<!-- ═══════════ PAGE: IDENTITY (2.0) ═══════════ -->
+<div id="page-identity" class="page">
+  <div class="page-content" style="padding-top:24px">
+    <div style="font-size:28px;font-weight:700;letter-spacing:-0.5px;margin-bottom:20px">WILCOT <span style="color:var(--text2)">2.0</span></div>
+
+    <!-- WHO IS 2.0 -->
+    <div class="id-section">
+      <div class="id-title">Who is Wilcot 2.0</div>
+      <div class="id-block"><div class="id-block-title">How he walks</div><div class="id-block-text">Upright. Shoulders back but relaxed — not military, just <b>open</b>. Slow pace. When he enters a room, he <b>pauses at the door</b>. Scans with calm curiosity. Takes up space without apology. Walks like the building is his.</div></div>
+      <div class="id-block"><div class="id-block-title">How he talks</div><div class="id-block-text">Lower register. <b>Pauses between thoughts.</b> Doesn't fill silence. Says less, means more. Listens with full attention. Doesn't seek approval after making a point. The ADHD energy comes through as <b>fast wit and unpredictability</b> — not nervousness.</div></div>
+      <div class="id-block"><div class="id-block-title">How he handles rejection</div><div class="id-block-text">A slight smile. <b>"Fair enough."</b> Moves on. Approaches someone else within 10 minutes. His self-worth was never on the table. <b>There's nothing to threaten.</b></div></div>
+      <div class="id-block"><div class="id-block-title">How he sits alone at a bar</div><div class="id-block-text">Leaned back. Drink in hand. <b>Phone in pocket.</b> Watching the room with warm curiosity. He's a man with 17 things he's excited about who happened to stop for a drink. Body language says <b>"I'm not waiting for anyone. I'm already here."</b></div></div>
+      <div class="id-block"><div class="id-block-title">How he approaches</div><div class="id-block-text">Within <b>3 seconds</b>. No script. Direct. "You caught my eye and I wanted to say hi." <b>Zero attachment to outcome</b> because the outcome doesn't change who he is. He approached because he moves toward what interests him. That's identity. Not effort.</div></div>
+      <div class="id-block"><div class="id-block-title">His energy</div><div class="id-block-text">Warm but independent. <b>Building businesses, training hard, living internationally, three languages.</b> He's genuinely <b>full</b>. His ADHD energy — fast, funny, jumping between ideas — that's the charisma. The programs used to suppress it. Now it flows freely.</div></div>
+      <div class="id-block"><div class="id-block-title">His eyes</div><div class="id-block-text">Holds eye contact <b>one beat longer than comfortable</b>. Not aggressive. <b>Warm.</b> When he's with you, he's <b>with you</b>. Real presence. The rarest thing.</div></div>
+      <div class="id-block id-highlight"><div class="id-block-title" style="color:var(--text)">The core truth</div><div class="id-block-text"><b>This isn't someone you're becoming. This is who you already are when the five programs aren't running.</b> Cold, breathwork, visualization, building, exposure — all starve the programs. What's left is him. Wilcot 2.0 isn't a fantasy. He's you without the software installed by a scared kid in Belgium who no longer exists.</div></div>
+    </div>
+
+    <!-- VISUALIZATION GUIDE -->
+    <div class="id-section">
+      <div class="id-title">Theater of the Mind — Scenes</div>
+      <div class="id-block"><div class="id-block-text"><b>Position:</b> Post-breathwork, post-cold. Eyes closed. 5 deep breaths.<br><b>Perspective:</b> FIRST PERSON — through YOUR eyes. You are IN the scene.<br><b>Duration:</b> 10-15 min. 3-5 scenes, ~2-3 min each.<br><b>The rule:</b> ALL senses. See it, hear it, feel it, smell it. <b>FEEL THE EMOTION.</b></div></div>
+
+      <div class="scene" onclick="this.classList.toggle('open')"><div class="scene-num">Scene 1</div><div class="scene-title">Walking into the room</div><div class="scene-preview">The entrance. How 2.0 arrives.</div><div class="scene-full">You're standing outside. Music from inside. <b>Feel your feet.</b> Chest open. You push the door. Walk in. <b>Pause.</b> One full second. Eyes scan — not frantically. Like an artist looking at a painting.<br><br>Walk to the bar. Slow. Deliberate. People glance. You meet their eyes briefly, warmly. Sit. Order. Watch the room. <b>Feel the contentment.</b> Alone on a Tuesday. No performance. No phone. Just a man with an interesting life.<br><br><b>Hold this feeling for 30 seconds.</b> The calm. The fullness. The zero-neediness.</div></div>
+
+      <div class="scene" onclick="this.classList.toggle('open')"><div class="scene-num">Scene 2</div><div class="scene-title">The approach</div><div class="scene-preview">You see her. 3 seconds. Feet move.</div><div class="scene-full">You see her. Something about her — the laugh, the energy.<br><br><b>3 seconds.</b> Feet already moving. Not thinking. "Hey. You caught my eye." She smiles. <b>Zero tension</b> because you have no outcome in mind. If she's into it — curious. If not — 17 other things you're excited about.<br><br>Conversation flows because you're genuinely curious, not performing. <b>Feel the ease. Hold it.</b></div></div>
+
+      <div class="scene" onclick="this.classList.toggle('open')"><div class="scene-num">Scene 3</div><div class="scene-title">The rejection</div><div class="scene-preview">She says no. You feel... nothing.</div><div class="scene-full">You approach. She says: "I have a boyfriend." Your face doesn't change. Posture doesn't shrink.<br><br>Slight smile. <b>"Fair enough. Enjoy your night."</b> Walk back with the same energy. Nothing happened. A stranger expressed a preference. Zero information about your value.<br><br><b>You stay.</b> Within 10 minutes, you see someone else. 3 seconds. Feet move. Again.<br><br><b>FEEL the absence of damage.</b> Your self-worth wasn't on the table. <b>Hold this feeling of indestructibility.</b></div></div>
+
+      <div class="scene" onclick="this.classList.toggle('open')"><div class="scene-num">Scene 4</div><div class="scene-title">Alone and full</div><div class="scene-preview">The bar-alone milestone. "Made it."</div><div class="scene-full">9 PM. Nice bar. Busy night. <b>You came alone.</b> Not as a challenge. Because you felt like it.<br><br>Drink in hand. Phone in pocket. Watching life with genuine interest — like a writer observing a scene. Not with envy. With warmth.<br><br><b>Both leaving and staying feel equally good</b> because you're going back to a life that's genuinely full.<br><br><b>This is the milestone. Feel it. Hold for 60 seconds.</b> Let the nervous system record it as real.</div></div>
+
+      <div class="scene" onclick="this.classList.toggle('open')"><div class="scene-num">Scene 5</div><div class="scene-title">Free form — Today's challenge</div><div class="scene-preview">Whatever's relevant right now.</div><div class="scene-full"><b>Business call:</b> Confident, clear, direct. "Here's what I can do for you." Feel the authority.<br><b>Walking through Bangkok:</b> Slow. Taking up space. Eye contact. "I'm exactly where I'm supposed to be."<br><b>Meeting someone new:</b> See 2.0 in that scenario. Relaxed. Present. Magnetic without trying.<br><br>Make it <b>specific to today</b>. Specificity is the bridge between visualization and reality.</div></div>
+    </div>
+
+    <!-- LIE UNTIL REAL -->
+    <div class="id-section">
+      <div class="id-title">"Lie Until Real" Method</div>
+      <div class="id-block"><div class="id-block-text">The 5 programs were installed exactly this way: a kid "lied" to himself that he needed social proof → brain found proof → belief solidified. <b>Same mechanism works in reverse.</b><br><br><b>The belief:</b> "I am complete on my own. A girl is a bonus, not a need."<br><br><b>1. Install deliberately.</b> Theta every night. Breathwork holds. Third-person script.<br><b>2. Act as if.</b> Stop seeking. Fill every hour with building, training, creating.<br><b>3. Weaponize confirmation bias.</b> Notice moments of genuine contentment alone. Log them.<br><b>4. Cognitive dissonance.</b> When behavior (acting complete) contradicts old belief → brain updates the BELIEF.<br><b>5. Evidence accumulates.</b> The "lie" stops being a lie.<br><br><b>Timeline:</b> 21-30 days consistent. After 30 days, new belief wins most retrieval competitions. After 60, it's default.</div></div>
+    </div>
+
+    <!-- 5 PROGRAMS -->
+    <div class="id-section">
+      <div class="id-title">The 5 Programs</div>
+      <div class="bento-card" style="padding:10px 18px">
+        <div class="prog-card"><div class="prog-num">P1</div><div style="flex:1"><div class="prog-name">Social Proof Dependency</div><div class="prog-desc">Needing witnesses to feel worthy. Being alone = exposed.</div></div></div>
+        <div class="prog-card"><div class="prog-num">P2</div><div style="flex:1"><div class="prog-name">External Battery</div><div class="prog-desc">Confidence borrowed from environment, not self-generated.</div></div></div>
+        <div class="prog-card"><div class="prog-num">P3</div><div style="flex:1"><div class="prog-name">Fear of Visible Effort</div><div class="prog-desc">Fear of being SEEN trying. "He's trying too hard."</div></div></div>
+        <div class="prog-card"><div class="prog-num">P4</div><div style="flex:1"><div class="prog-name">Height as Evidence</div><div class="prog-desc">Using height as proof the programs are justified.</div></div></div>
+        <div class="prog-card"><div class="prog-num">P5</div><div style="flex:1"><div class="prog-name">Money = Freedom</div><div class="prog-desc">Postponing self-acceptance to a financial milestone that keeps moving.</div></div></div>
+      </div>
+      <div style="font-size:11px;color:var(--text3);margin-top:8px;line-height:1.5;padding:0 4px">When a program activates: name it, notice it, let it pass. You're the observer, not the host.</div>
+    </div>
+
+    <!-- 8 RULES -->
+    <div class="id-section">
+      <div class="id-title">Core Rules</div>
+      <div class="bento-card" style="padding:10px 18px">
+        <div class="rule"><div class="rule-num">01</div><div class="rule-text">Your nervous system is a machine. Machines are programmable. You are the programmer.</div></div>
+        <div class="rule"><div class="rule-num">02</div><div class="rule-text">The five programs were installed by circumstance. They are not you. Tag them when they activate.</div></div>
+        <div class="rule"><div class="rule-num">03</div><div class="rule-text">Act as 2.0 NOW. Not when you're ready. The "lie" becomes real through action. Delulu is the mechanism.</div></div>
+        <div class="rule"><div class="rule-num">04</div><div class="rule-text">Discomfort is data, not danger. Your cold shower proves this every morning. Social discomfort = same circuit.</div></div>
+        <div class="rule"><div class="rule-num">05</div><div class="rule-text">3-second override: feet move before programs boot. Don't give them 3 seconds.</div></div>
+        <div class="rule"><div class="rule-num">06</div><div class="rule-text">Rejection is a rep. Embarrassment is a rep. The callous gets thicker. Don't skip reps.</div></div>
+        <div class="rule"><div class="rule-num">07</div><div class="rule-text">Fill the vacancy. Programs starve in flow. Build, train, create, learn. In that order.</div></div>
+        <div class="rule"><div class="rule-num">08</div><div class="rule-text">Confidence = evidence. Not affirmation. Charge the evidence log daily.</div></div>
+      </div>
+    </div>
+
+    <!-- MEMORY MANIPULATION -->
+    <div class="id-section">
+      <div class="id-title">Memory Manipulation</div>
+      <div class="id-block"><div class="id-block-text">Every recall makes the memory <b>malleable</b> (reconsolidation). You can rewrite the emotional charge.<br><br><b>Rewrite negatives (3-5x/week):</b> Recall a rejection. Feel it activate. Then REWRITE: "I walked away unbothered. Smiled. Approached someone else 5 min later." Repeat 3-5x. Old sting weakens.<br><br><b>Amplify positives (daily):</b> Girls pursuing you, social wins, times you were magnetic — recall, add detail, feel it MORE intensely. Make positives <b>louder</b> than negatives.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PAGE: HISTORY ═══════════ -->
+<div id="page-history" class="page">
+  <div class="page-content" style="padding-top:24px">
+    <div style="font-size:28px;font-weight:700;letter-spacing:-0.5px;margin-bottom:24px">History</div>
+
+    <div class="bento-card">
+      <div class="section-title">All-Time Stats</div>
+      <div class="daily-input"><div class="daily-label">Days active</div><div style="font-size:16px;font-weight:700" id="statDays">0</div></div>
+      <div class="daily-input"><div class="daily-label">Current streak</div><div style="font-size:16px;font-weight:700" id="statStreak">0</div></div>
+      <div class="daily-input"><div class="daily-label">Longest streak</div><div style="font-size:16px;font-weight:700" id="statLongest">0</div></div>
+      <div class="daily-input"><div class="daily-label">Total exposure reps</div><div style="font-size:16px;font-weight:700" id="statReps">0</div></div>
+      <div class="daily-input"><div class="daily-label">Total 3-sec overrides</div><div style="font-size:16px;font-weight:700" id="statOverrides">0</div></div>
+      <div class="daily-input"><div class="daily-label">Evidence entries</div><div style="font-size:16px;font-weight:700" id="statEvidence">0</div></div>
+    </div>
+
+    <div class="bento-card" style="margin-top:12px">
+      <div class="section-title">Day-by-Day</div>
+      <div id="historyList"></div>
+    </div>
+
+    <div class="bento-card" style="margin-top:12px">
+      <button class="save-btn secondary" onclick="exportData()">Export All Data (JSON)</button>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV (mobile) -->
 <div class="bottom-nav mobile-only">
-  <button class="nav-btn active" data-page="page-today">
-    <span class="nav-icon">&#9711;</span>Today
-  </button>
-  <button class="nav-btn" data-page="page-history">
-    <span class="nav-icon">&#9776;</span>History
-  </button>
+  <button class="nav-btn active" data-page="page-today"><span class="nav-icon">○</span>Today</button>
+  <button class="nav-btn" data-page="page-exposure"><span class="nav-icon">⚡</span>Exposure</button>
+  <button class="nav-btn" data-page="page-identity"><span class="nav-icon">◆</span>2.0</button>
+  <button class="nav-btn" data-page="page-history"><span class="nav-icon">☰</span>History</button>
 </div>
 
 <script>
-// ===== DATA LAYER =====
-const STORAGE_KEY = 'sovereign_daily_v1';
-const load = () => { try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; } };
-const save = (d) => localStorage.setItem(STORAGE_KEY, JSON.stringify(d));
-const today = () => new Date().toISOString().split('T')[0];
-const getDay = () => {
-  const d = load(); const t = today();
-  if (!d.days) d.days = {};
-  if (!d.days[t]) d.days[t] = { checks: {}, wins: '', reframes: '', exposure: '' };
-  return { data: d, date: t, day: d.days[t] };
-};
+// ═══════════════════════════════════════════════
+// SOVEREIGN DAILY — Core System
+// ═══════════════════════════════════════════════
+const STORAGE_KEY = 'sovereign_daily_v2';
+const OLD_KEY = 'sovereign_daily_v1';
+const START_DATE = '2026-03-09';
 
-// ===== GREETING =====
+const DEFAULT_MORNING_STATEMENT = 'Wilcot walks into today calm and grounded. He doesn\'t seek approval. He speaks directly. He\'s building businesses that matter. He handles whatever comes without hesitation. He approaches what interests him. He is magnetic because he is full — not because he\'s performing. This is who he is now.';
+const DEFAULT_EVENING_STATEMENT = 'I walk into any room and own it. I don\'t need anyone to prove my value — I am the proof. I am complete on my own. A girl is a bonus, not a need. I am magnetic because I am full.';
+
+const EXPOSURE_LEVELS = [
+  {level:1, name:'Ask directions / time', target:'Zero anxiety. Automatic.', detail:'3x/day. Approach any stranger with a simple question. Train feet to move toward people.'},
+  {level:2, name:'Compliment a stranger', target:'Slight discomfort, quick recovery', detail:'2x/day. Something visible — hat, tattoo, energy. Express a positive thought OUT LOUD.'},
+  {level:3, name:'Small talk with someone', target:'Can sustain 2+ min conversation', detail:'2x/day. Coffee shop, gym, checkout line. Turn a transaction into a conversation.'},
+  {level:4, name:'Sit alone at bar 30+ min', target:'Body relaxed. Not scanning.', detail:'Program 1 killer. No phone. Order, sit, watch. When the urge to check your phone comes — that\'s the program. Let it pass.'},
+  {level:5, name:'Conversation with a group', target:'Nervous but functional.', detail:'Approach 2-3 people at a bar or social setting. "Mind if I join you?" Enter someone else\'s social space without invitation.'},
+  {level:6, name:'Approach someone attractive', target:'Heart rate up. Do it anyway.', detail:'"You look interesting, what\'s your story?" NOT trying for a number. Just expressing interest. 3-second override.'},
+  {level:7, name:'Express direct interest', target:'Accept whatever response.', detail:'"I think you\'re attractive and wanted to come say hi." Full directness. No plausible deniability. Program 3 dies here.'},
+  {level:8, name:'Rejected → stay → approach again', target:'Rejection = data, not damage.', detail:'Get rejected and DO NOT LEAVE. Within 10 min, approach someone else. Prove rejection doesn\'t require recovery.'},
+  {level:9, name:'Full unfiltered expression', target:'Vulnerable AND safe.', detail:'No cool guy frame. Just you — fast, funny, intense. ADHD energy flowing freely. Show up without any filter and survive.'},
+  {level:10, name:'Rejection = genuinely nothing', target:'Program is dead.', detail:'Someone rejects you and you feel real nothing. Like someone saying they don\'t like your shirt. Information, not identity. Circuit rewired.'}
+];
+
+const RULES = [
+  'Your nervous system is a machine. Machines are programmable. Program it deliberately or it programs itself from fear.',
+  'The Sovereign is the version of you that exists when you remove every limitation accepted from other people.',
+  'Discomfort is the currency of transformation. You cannot buy growth with comfort. Pay up daily.',
+  'Your voice, your eyes, your posture, your breath — these are weapons. Train them.',
+  'Rejection is a rep. Embarrassment is a rep. Failure is a rep. You do not skip reps.',
+  'The person who controls their nervous system controls the room. Vagal tone is power.',
+  'Conviction creates reality. Commit irreversibly to who you are becoming.',
+  'The world is full of people waiting for permission. You do not wait. You go first.',
+  'Sleep. Lift. Sun. Cold. These are not optional. Your chemistry is the foundation.',
+  'Status is a feedback loop. Broadcast it, receive it, internalize it.',
+  'Every approach you avoid, every conversation you duck — that is a day stolen.',
+  'Fill the vacancy. Programs starve when you are in flow. Never idle.'
+];
+
+// ═══ Data Layer ═══
+function defaultData() {
+  return { startDate: START_DATE, morningStatement: DEFAULT_MORNING_STATEMENT, eveningStatement: DEFAULT_EVENING_STATEMENT, reps: [], pipeline: [], overrideTotal: 0, longestStreak: 0, currentLevel: 1, days: {} };
+}
+function load() {
+  try {
+    let raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) return { ...defaultData(), ...JSON.parse(raw) };
+    raw = localStorage.getItem(OLD_KEY);
+    if (raw) { const old = JSON.parse(raw); const d = { ...defaultData(), ...old }; save(d); return d; }
+  } catch(e) {}
+  return defaultData();
+}
+function save(d) { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }
+let data = load();
+function td() { return new Date().toISOString().split('T')[0]; }
+function getDay(date) {
+  if (!date) date = td();
+  if (!data.days) data.days = {};
+  if (!data.days[date]) data.days[date] = { checks: {}, evidence: '', wins: '', reframes: '', exposure: '', programTags: [], programNote: '', overrideCount: 0, deepWork: 0, trained: false, zeroDopamine: false, notes: '' };
+  return data.days[date];
+}
+function dayNum() { return Math.max(1, Math.floor((Date.now() - new Date(data.startDate || START_DATE).getTime()) / 86400000) + 1); }
+
+// ═══ Greeting ═══
 function updateGreeting() {
   const h = new Date().getHours();
   const g = h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : h < 21 ? 'Good evening' : 'Night mode';
   document.getElementById('greeting').textContent = g;
-  const now = new Date();
-  document.getElementById('headerTime').textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
-  const { data } = getDay();
-  const start = data.startDate || today();
-  if (!data.startDate) { data.startDate = start; save(data); }
-  const dayNum = Math.max(1, Math.floor((Date.now() - new Date(start).getTime()) / 86400000) + 1);
-  document.getElementById('headerSub').textContent = 'Day ' + dayNum;
+  document.getElementById('headerTime').textContent = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+  document.getElementById('headerSub').textContent = 'Day ' + dayNum();
 }
 
-// ===== CHECKLIST LOGIC =====
-document.querySelectorAll('.check-item, .mini-check').forEach(item => {
-  item.addEventListener('click', () => {
-    const key = item.dataset.key; if (!key) return;
-    item.classList.toggle('done');
-    const { data, date, day } = getDay();
-    day.checks[key] = item.classList.contains('done');
-    data.days[date] = day; save(data); updateStats();
+// ═══ Checklist ═══
+function handleCheck(e, el) {
+  if (e.target.closest('.check-arrow')) { el.classList.toggle('expanded'); return; }
+  if (e.target.closest('.check-detail')) return;
+  if (e.target.closest('.check-box')) {
+    el.classList.toggle('done'); el.classList.remove('expanded');
+    const day = getDay(); day.checks[el.dataset.key] = el.classList.contains('done');
+    save(data); updateProgress(); checkStreak(); return;
+  }
+  el.classList.toggle('expanded');
+}
+function handleMiniCheck(el) {
+  el.classList.toggle('done');
+  const day = getDay(); day.checks[el.dataset.key] = el.classList.contains('done');
+  save(data); updateProgress();
+}
+function restoreChecks() {
+  const day = getDay(); if (!day.checks) return;
+  document.querySelectorAll('.check-item[data-key], .mini-check[data-key]').forEach(el => {
+    if (day.checks[el.dataset.key]) el.classList.add('done');
   });
-});
+  document.querySelectorAll('.supp-pill[data-key]').forEach(el => {
+    if (day.checks[el.dataset.key]) el.classList.add('done');
+  });
+  if (day.trained) document.getElementById('dailyTrain').classList.add('done');
+  if (day.zeroDopamine) document.getElementById('dailyDopamine').classList.add('done');
+  document.getElementById('dailyWork').value = day.deepWork || 0;
+  document.getElementById('overrideCount').textContent = day.overrideCount || 0;
+}
+
+// ═══ Supplement Clicks ═══
 document.querySelectorAll('.supp-pill').forEach(pill => {
   pill.addEventListener('click', () => {
-    const key = pill.dataset.key; if (!key) return;
     pill.classList.toggle('done');
-    const { data, date, day } = getDay();
-    day.checks[key] = pill.classList.contains('done');
-    data.days[date] = day; save(data); updateStats();
+    const day = getDay(); day.checks[pill.dataset.key] = pill.classList.contains('done');
+    save(data); updateProgress();
   });
 });
 
-// ===== RESTORE CHECKS =====
-function restoreChecks() {
-  const { day } = getDay(); if (!day.checks) return;
-  Object.entries(day.checks).forEach(([key, val]) => {
-    if (!val) return;
-    const el = document.querySelector('[data-key="' + key + '"]');
-    if (el) el.classList.add('done');
-  });
-}
-
-// ===== STATS =====
-function updateStats() {
-  const { day } = getDay(); const c = day.checks || {};
-  const morning = ['m1','m2','m3','m4','m5','m6','m7'].filter(k => c[k]).length;
-  const evening = ['e1','e2','e3','e4'].filter(k => c[k]).length;
-  const discomfort = ['d1','d2','d3'].filter(k => c[k]).length;
-  const stacks = ['stack_morning','stack_midday','stack_preworkout','stack_evening','stack_bedtime'].filter(k => c[k]).length;
-  const total = morning + evening + discomfort + stacks;
-  const max = 19;
+// ═══ Progress & Badges ═══
+function updateProgress() {
+  const c = getDay().checks || {};
+  const mCount = ['m1','m2','m3','m4','m5','m6'].filter(k => c[k]).length;
+  const eCount = ['e1','e2','e3'].filter(k => c[k]).length;
+  const dCount = ['d1','d2','d3'].filter(k => c[k]).length;
+  const sCount = ['stack_morning','stack_midday','stack_pre','stack_evening','stack_bedtime'].filter(k => c[k]).length;
+  const total = mCount + eCount + dCount + sCount;
+  const max = 17;
   const pct = Math.round((total / max) * 100);
   document.getElementById('progressPct').textContent = pct + '%';
   document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('morningBadge').textContent = mCount + '/6';
+  document.getElementById('eveningBadge').textContent = eCount + '/3';
 }
 
-// ===== STREAK =====
-function renderStreak() {
-  const data = load(); const row = document.getElementById('streakRow'); const t = today();
-  row.innerHTML = '';
+// ═══ Daily Targets ═══
+function saveDay() {
+  const day = getDay();
+  day.deepWork = parseInt(document.getElementById('dailyWork').value) || 0;
+  save(data);
+}
+function toggleDailyCheck(el, key) {
+  el.classList.toggle('done');
+  const day = getDay(); day[key] = el.classList.contains('done'); save(data);
+}
+function adjustCounter(delta) {
+  const day = getDay();
+  day.overrideCount = Math.max(0, (day.overrideCount || 0) + delta);
+  document.getElementById('overrideCount').textContent = day.overrideCount;
+  if (delta > 0) data.overrideTotal = (data.overrideTotal || 0) + 1;
+  save(data);
+}
+
+// ═══ Statements ═══
+function editStatement(type) {
+  const display = document.getElementById(type + 'Display');
+  const edit = document.getElementById(type + 'Edit');
+  const input = document.getElementById(type + 'Input');
+  input.value = data[type + 'Statement'] || (type === 'morning' ? DEFAULT_MORNING_STATEMENT : DEFAULT_EVENING_STATEMENT);
+  display.style.display = 'none'; edit.style.display = 'block';
+  input.focus();
+}
+function saveStatement(type) {
+  const input = document.getElementById(type + 'Input');
+  data[type + 'Statement'] = input.value;
+  save(data);
+  document.getElementById(type + 'Display').textContent = input.value;
+  document.getElementById(type + 'Display').style.display = '';
+  document.getElementById(type + 'Edit').style.display = 'none';
+}
+function loadStatements() {
+  document.getElementById('morningDisplay').textContent = data.morningStatement || DEFAULT_MORNING_STATEMENT;
+  document.getElementById('eveningDisplay').textContent = data.eveningStatement || DEFAULT_EVENING_STATEMENT;
+}
+
+// ═══ Timer ═══
+let timerInterval = null;
+let timerVal = 3.0;
+document.getElementById('timerStart').addEventListener('click', () => {
+  if (timerInterval) return;
+  const display = document.getElementById('timerDisplay');
+  timerInterval = setInterval(() => {
+    timerVal -= 0.1;
+    if (timerVal <= 0) { timerVal = 0; clearInterval(timerInterval); timerInterval = null; display.textContent = 'GO'; display.style.color = 'var(--green)'; setTimeout(() => { display.style.color = ''; display.textContent = '3.0'; timerVal = 3.0; }, 2000); return; }
+    display.textContent = timerVal.toFixed(1);
+  }, 100);
+});
+document.getElementById('timerReset').addEventListener('click', () => {
+  clearInterval(timerInterval); timerInterval = null; timerVal = 3.0;
+  const d = document.getElementById('timerDisplay'); d.textContent = '3.0'; d.style.color = '';
+});
+
+// ═══ Pipeline ═══
+function renderPipeline() {
+  const list = document.getElementById('pipelineList');
+  const items = data.pipeline || [];
+  list.innerHTML = items.length === 0 ? '<div style="font-size:12px;color:var(--text3);padding:8px 0">Empty. Add 3+ exciting upcoming things.</div>' :
+    items.map((item, i) => `<div class="pipe-item"><div class="pipe-dot"></div><div class="pipe-text">${item.replace(/</g,'&lt;')}</div><div class="pipe-rm" onclick="removePipeline(${i})">×</div></div>`).join('');
+  const badge = document.getElementById('pipeBadge');
+  badge.textContent = items.length + '/3';
+  badge.style.color = items.length >= 3 ? 'var(--green)' : '';
+}
+function addPipeline() {
+  const text = prompt('What exciting thing is coming?');
+  if (!text) return;
+  data.pipeline.push(text); save(data); renderPipeline();
+}
+function removePipeline(i) { data.pipeline.splice(i, 1); save(data); renderPipeline(); }
+
+// ═══ Streaks ═══
+function checkStreak() {
+  const c = getDay().checks || {};
+  const mDone = ['m1','m2','m3','m4','m5','m6'].every(k => c[k]);
+  const eDone = ['e1','e2','e3'].every(k => c[k]);
+  if (mDone && eDone) { if (!data.days[td()].streakComplete) { data.days[td()].streakComplete = true; save(data); } }
+}
+function calcStreak() {
+  let streak = 0; let d = new Date(td());
+  while (true) {
+    const key = d.toISOString().split('T')[0];
+    const day = data.days && data.days[key];
+    if (day && day.streakComplete) { streak++; d.setDate(d.getDate() - 1); }
+    else if (day && day.checks) {
+      const c = day.checks;
+      const mDone = ['m1','m2','m3','m4','m5','m6'].every(k => c[k]);
+      const eDone = ['e1','e2','e3'].every(k => c[k]);
+      if (mDone && eDone) { streak++; d.setDate(d.getDate() - 1); } else break;
+    } else break;
+  }
+  if (streak > (data.longestStreak || 0)) { data.longestStreak = streak; save(data); }
+  return streak;
+}
+function renderStreak14() {
+  const row = document.getElementById('streakRow14'); row.innerHTML = '';
   for (let i = 13; i >= 0; i--) {
     const d = new Date(); d.setDate(d.getDate() - i);
-    const ds = d.toISOString().split('T')[0];
-    const dd = data.days && data.days[ds];
-    const done = dd && dd.checks ? Object.values(dd.checks).filter(Boolean).length : 0;
-    const isToday = ds === t;
-    const cls = isToday ? 'today' : done >= 8 ? 'done' : 'empty';
-    const el = document.createElement('div');
-    el.className = 'streak-dot ' + cls;
-    el.textContent = d.getDate();
-    row.appendChild(el);
+    const ds = d.toISOString().split('T')[0]; const day = data.days && data.days[ds];
+    const checks = day && day.checks ? Object.values(day.checks).filter(Boolean).length : 0;
+    const isToday = ds === td();
+    const cls = isToday ? 'today' : checks >= 8 ? 'done' : 'empty';
+    const el = document.createElement('div'); el.className = 'streak-dot ' + cls; el.textContent = d.getDate(); row.appendChild(el);
   }
 }
-
-// ===== DAILY RULE =====
-const rules = [
-  'Your nervous system is a machine. Machines are programmable. Program it deliberately or it programs itself from fear.',
-  'The Sovereign is not a character you play. It is the version of you that exists when you remove every limitation you have accepted from other people.',
-  'Discomfort is the currency of transformation. You cannot buy growth with comfort. Pay up daily.',
-  'Your voice, your eyes, your posture, your breath -- these are not accessories. They are weapons. Train them.',
-  'Rejection is a rep. Embarrassment is a rep. Failure is a rep. You do not skip reps.',
-  'The person who controls their nervous system controls the room. Vagal tone is power.',
-  'Status is a feedback loop. Broadcast it, receive it, internalize it. The loop is self-reinforcing.',
-  'Your body stores every time you froze. TRE, combat, breathwork -- these unfreeze it.',
-  'Conviction creates reality. Commit irreversibly to who you are becoming. Your brain will follow your actions.',
-  'You have a finite number of days. Every approach you avoid, every conversation you duck -- that is a day stolen from the Sovereign.',
-  'Sleep. Lift. Sun. Cold. These are not optional. Your chemistry is the foundation.',
-  'The world is full of people waiting for permission to be themselves. You do not wait. You go first.',
-];
-function setDailyRule() {
-  const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
-  document.getElementById('dailyRule').textContent = rules[dayOfYear % rules.length];
+function renderStreak30() {
+  const grid = document.getElementById('streakGrid30'); let html = '';
+  const now = new Date(td()); const start = new Date(now); start.setDate(start.getDate() - 27);
+  for (let i = 0; i < 28; i++) {
+    const d = new Date(start); d.setDate(d.getDate() + i);
+    const key = d.toISOString().split('T')[0]; const isToday = key === td();
+    const day = data.days && data.days[key];
+    const isDone = day && (day.streakComplete || (day.checks && ['m1','m2','m3','m4','m5','m6','e1','e2','e3'].every(k => day.checks[k])));
+    const isPast = d < new Date(td()) && d >= new Date(data.startDate || START_DATE);
+    let cls = 'streak-day'; if (isToday) cls += ' today'; else if (isDone) cls += ' done'; else if (isPast) cls += ' missed'; html += `<div class="${cls}">${d.getDate()}</div>`;
+  }
+  grid.innerHTML = html;
 }
 
-// ===== MODE TOGGLE =====
+// ═══ Daily Rule ═══
+function setDailyRule() {
+  const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+  document.getElementById('dailyRule').textContent = RULES[dayOfYear % RULES.length];
+}
+
+// ═══ Mode Toggle ═══
 document.querySelectorAll('.mode-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const mode = btn.dataset.mode;
-    document.getElementById('mode-checklist').style.display = mode === 'checklist' ? 'block' : 'none';
-    document.getElementById('mode-journal').style.display = mode === 'journal' ? 'block' : 'none';
+    document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active');
+    document.getElementById('mode-checklist').style.display = btn.dataset.mode === 'checklist' ? 'block' : 'none';
+    document.getElementById('mode-journal').style.display = btn.dataset.mode === 'journal' ? 'block' : 'none';
   });
 });
 
-// ===== NAV (mobile + desktop) =====
+// ═══ Navigation ═══
 function switchPage(pageId) {
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.desktop-nav button').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.nav-btn, .desktop-nav button').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(pageId).classList.add('active');
-  // Highlight correct buttons
   document.querySelectorAll('[data-page="' + pageId + '"]').forEach(b => b.classList.add('active'));
   if (pageId === 'page-history') renderHistory();
+  if (pageId === 'page-exposure') { renderExposureLevels(); renderRecentReps(); }
 }
 document.querySelectorAll('.nav-btn, .desktop-nav button').forEach(btn => {
   btn.addEventListener('click', () => switchPage(btn.dataset.page));
 });
 
-// ===== JOURNAL =====
+// ═══ Journal ═══
 function saveJournal(type) {
-  const { data, date, day } = getDay();
-  const map = { wins: 'winJournal', reframes: 'reframeJournal', exposure: 'exposureJournal' };
+  const map = { evidence: 'jEvidence', wins: 'jWins', reframes: 'jReframe', exposure: 'jExposure', notes: 'jNotes' };
   const el = document.getElementById(map[type]);
-  day[type] = el.value; data.days[date] = day; save(data);
-  el.value = ''; loadPastEntries();
+  const day = getDay(); day[type] = el.value; save(data);
+  el.value = ''; loadJournalEntries();
 }
-function loadPastEntries() {
-  const data = load(); if (!data.days) return;
-  ['wins','reframes','exposure'].forEach(type => {
-    const containerId = type === 'wins' ? 'pastWins' : type === 'reframes' ? 'pastReframes' : 'pastExposure';
-    const container = document.getElementById(containerId); container.innerHTML = '';
-    const days = Object.entries(data.days).sort((a,b) => b[0].localeCompare(a[0])).slice(0, 5);
+function savePrograms() {
+  const active = [...document.querySelectorAll('.prog-tag.active')].map(el => el.dataset.prog);
+  const note = document.getElementById('jProgNote').value;
+  if (active.length === 0 && !note) return;
+  const day = getDay(); day.programTags = active; day.programNote = note; save(data);
+  document.querySelectorAll('.prog-tag').forEach(el => el.classList.remove('active'));
+  document.getElementById('jProgNote').value = '';
+}
+function loadJournalEntries() {
+  const types = { evidence: 'pastEvidence', wins: 'pastWins', reframes: 'pastReframes', exposure: 'pastExposure' };
+  Object.entries(types).forEach(([type, containerId]) => {
+    const container = document.getElementById(containerId); if (!container) return; container.innerHTML = '';
+    const days = Object.entries(data.days || {}).sort((a,b) => b[0].localeCompare(a[0])).slice(0, 5);
     days.forEach(([date, day]) => {
       if (!day[type]) return;
       const div = document.createElement('div'); div.className = 'past-entry';
-      const safe = day[type].replace(/</g,'&lt;').replace(/\n/g, '<br>');
-      div.innerHTML = '<div class="past-date">' + date + '</div>' + safe;
+      div.innerHTML = '<div class="past-date">' + date + '</div>' + day[type].replace(/</g,'&lt;').replace(/\n/g,'<br>');
       container.appendChild(div);
     });
   });
-  const { day } = getDay();
-  if (day.wins) document.getElementById('winJournal').value = day.wins;
-  if (day.reframes) document.getElementById('reframeJournal').value = day.reframes;
-  if (day.exposure) document.getElementById('exposureJournal').value = day.exposure;
-}
-
-// ===== HISTORY =====
-function renderHistory() {
-  const data = load(); const list = document.getElementById('historyList');
-  list.innerHTML = '';
-  if (!data.days) { list.textContent = 'No history yet.'; return; }
-  const days = Object.entries(data.days).sort((a,b) => b[0].localeCompare(a[0]));
-  days.forEach(([date, day]) => {
-    const checks = day.checks ? Object.values(day.checks).filter(Boolean).length : 0;
-    const total = 19;
-    const pct = Math.round((Math.min(checks, total) / total) * 100);
-    const d = document.createElement('div');
-    d.style.cssText = 'padding:14px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center';
-    d.innerHTML = '<div style="font-size:15px;font-weight:500">' + date + '</div><div style="font-size:14px;color:var(--text2)">' + pct + '%</div>';
-    list.appendChild(d);
-  });
-}
-
-// ===== 5-SECOND TIMER =====
-let timerInterval = null;
-let timerVal = 5.0;
-document.getElementById('timerStart').addEventListener('click', () => {
-  if (timerInterval) return;
-  timerInterval = setInterval(() => {
-    timerVal -= 0.1;
-    if (timerVal <= 0) { timerVal = 0; clearInterval(timerInterval); timerInterval = null; }
-    document.getElementById('timerDisplay').textContent = timerVal.toFixed(1);
-  }, 100);
-});
-document.getElementById('timerReset').addEventListener('click', () => {
-  clearInterval(timerInterval); timerInterval = null;
-  timerVal = 5.0;
-  document.getElementById('timerDisplay').textContent = '5.0';
-});
-
-// ===== AUTO JOURNAL SWITCH =====
-function checkAutoJournal() {
-  const h = new Date().getHours();
-  if (h >= 20) {
-    const { day } = getDay();
-    const totalChecks = Object.values(day.checks || {}).filter(Boolean).length;
-    if (totalChecks >= 8) {
-      const btn = document.querySelector('[data-mode="journal"]');
-      if (btn && !btn.dataset.autoSwitched) { btn.dataset.autoSwitched = '1'; btn.click(); }
-    }
+  // Restore today's entries
+  const day = getDay();
+  if (day.evidence) document.getElementById('jEvidence').value = day.evidence;
+  if (day.wins) document.getElementById('jWins').value = day.wins;
+  if (day.reframes) document.getElementById('jReframe').value = day.reframes;
+  if (day.exposure) document.getElementById('jExposure').value = day.exposure;
+  if (day.notes) document.getElementById('jNotes').value = day.notes;
+  if (day.programTags && day.programTags.length) {
+    day.programTags.forEach(tag => {
+      const el = document.querySelector('.prog-tag[data-prog="' + tag + '"]');
+      if (el) el.classList.add('active');
+    });
   }
+  if (day.programNote) document.getElementById('jProgNote').value = day.programNote;
 }
 
-// ===== INIT =====
+// ═══ Exposure ═══
+function renderExposureLevels() {
+  const container = document.getElementById('exposureLevels');
+  const select = document.getElementById('repLevel');
+  container.innerHTML = EXPOSURE_LEVELS.map(l => {
+    const repsAt = (data.reps || []).filter(r => r.level === l.level).length;
+    const status = l.level < data.currentLevel ? 'complete' : l.level === data.currentLevel ? 'current' : 'locked';
+    return `<div class="exp-level" onclick="this.classList.toggle('expanded')"><div class="exp-num ${status}">${l.level}</div><div class="exp-info"><div class="exp-name">${l.name}</div><div class="exp-target">${l.target}</div><div class="exp-detail">${l.detail}</div></div><div class="exp-reps">${repsAt} reps</div></div>`;
+  }).join('');
+  select.innerHTML = EXPOSURE_LEVELS.map(l => `<option value="${l.level}">Level ${l.level} — ${l.name}</option>`).join('');
+  document.getElementById('expLevelTitle').textContent = data.currentLevel;
+}
+document.getElementById('repFeel').addEventListener('input', function() { document.getElementById('repFeelVal').textContent = this.value; });
+function logRep() {
+  const level = parseInt(document.getElementById('repLevel').value);
+  const note = document.getElementById('repNote').value;
+  const feel = parseInt(document.getElementById('repFeel').value);
+  if (!note.trim()) { alert('Write what happened.'); return; }
+  if (!data.reps) data.reps = [];
+  data.reps.push({ date: td(), level, note, feel, time: new Date().toLocaleTimeString() });
+  document.getElementById('repNote').value = '';
+  document.getElementById('repFeel').value = 5; document.getElementById('repFeelVal').textContent = '5';
+  save(data); renderRecentReps(); renderExposureLevels(); updateAllStats();
+}
+function renderRecentReps() {
+  const container = document.getElementById('recentReps');
+  const recent = [...(data.reps || [])].reverse().slice(0, 20);
+  if (recent.length === 0) { container.innerHTML = '<div style="font-size:12px;color:var(--text3);padding:8px 0">No reps yet. Go do something uncomfortable.</div>'; return; }
+  container.innerHTML = recent.map(r => `<div class="rep-entry"><div class="rep-meta"><span>Level ${r.level} · Feel: ${r.feel}/10</span><span>${r.date}</span></div><div class="rep-note">${r.note.replace(/</g,'&lt;')}</div></div>`).join('');
+}
+
+// ═══ History ═══
+function renderHistory() {
+  const list = document.getElementById('historyList');
+  if (!data.days || Object.keys(data.days).length === 0) { list.textContent = 'No history yet.'; return; }
+  const days = Object.entries(data.days).sort((a,b) => b[0].localeCompare(a[0]));
+  list.innerHTML = days.map(([date, day]) => {
+    const checks = day.checks ? Object.values(day.checks).filter(Boolean).length : 0;
+    const pct = Math.round((Math.min(checks, 17) / 17) * 100);
+    return `<div style="padding:14px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><div style="font-size:15px;font-weight:500">${date}</div><div style="font-size:14px;color:var(--text2)">${pct}%</div></div>`;
+  }).join('');
+  updateAllStats();
+}
+function updateAllStats() {
+  const streak = calcStreak();
+  document.getElementById('statDays').textContent = dayNum();
+  document.getElementById('statStreak').textContent = streak;
+  document.getElementById('statLongest').textContent = Math.max(streak, data.longestStreak || 0);
+  document.getElementById('statReps').textContent = (data.reps || []).length;
+  document.getElementById('statOverrides').textContent = data.overrideTotal || 0;
+  const evCount = Object.values(data.days || {}).filter(d => d.evidence).length;
+  document.getElementById('statEvidence').textContent = evCount;
+}
+
+// ═══ Export ═══
+function exportData() {
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'sovereign-data-' + td() + '.json'; a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ═══ Init ═══
 function init() {
   updateGreeting();
+  loadStatements();
   restoreChecks();
-  updateStats();
-  renderStreak();
+  updateProgress();
   setDailyRule();
-  loadPastEntries();
-  checkAutoJournal();
+  renderPipeline();
+  renderStreak14();
+  renderStreak30();
+  renderExposureLevels();
+  renderRecentReps();
+  loadJournalEntries();
+  updateAllStats();
   setInterval(updateGreeting, 60000);
 }
 init();
